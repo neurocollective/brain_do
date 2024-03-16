@@ -1,6 +1,6 @@
 const Todo = (props) => {
 
-  const { data, index } = props;
+  const { data, index, onChange } = props; // data -> `{ completed, text }`
 
   let textClass = '';
 
@@ -13,12 +13,12 @@ const Todo = (props) => {
       <input
         type="checkbox"
         checked={data.completed}
-        onChange={() => props.onChange(index)}
+        onChange={() => onChange(index)}
       />
       <span className={textClass}>{data.text}</span>
     </li>
   );
-}
+};
 
 const TodosDisplay = (props) => {
   const { todos } = props;
@@ -26,7 +26,7 @@ const TodosDisplay = (props) => {
     return (
       <ul className="todo-container">
         {todos.map((todo, index) => {
-          return <Todo onChange={props.handleCompletedToggle} data={todo} index={index} />
+          return <Todo key={todo.id} onChange={props.handleCompletedToggle} data={todo} index={index} />
         })}
       </ul>
     );
