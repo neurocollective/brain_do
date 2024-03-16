@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import DisplayStateJSON from './DisplayStateJSON.js';
+import Todo from './Todo.js';
+
+import { useState } from 'react';
+
+const initialState = {
+  todos: [], // this is the most important datapoint
+  loggedIn: false,
+};
 
 function App() {
+
+  const [state, setState] = useState(initialState);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="column columnOne">
+        <DisplayStateJSON data={state} />
+      </div>
+      <div className="column columnTwo">
+        <Todo />
+      </div>
     </div>
   );
 }
