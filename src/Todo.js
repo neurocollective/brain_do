@@ -3,7 +3,7 @@ const Todo = (props) => {
   
     return (
       <div>
-        this will be the Todo list
+        Dave just made a CHANGE
       </div>
     );
   };
