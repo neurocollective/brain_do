@@ -1,23 +1,32 @@
-const handleCompletedToggle = () => {
+const Todo = (props) => {
 
+  const { data, index } = props;
+
+  let textClass = '';
+
+  if (data.completed) {
+    textClass = 'strikethrough';
+  }
+
+  return (
+    <li key={data.id}>
+      <input
+        type="checkbox"
+        checked={data.completed}
+        onChange={() => props.onChange(index)}
+      />
+      <span className={textClass}>{data.text}</span>
+    </li>
+  );
 }
 
 const TodosDisplay = (props) => {
   const { todos } = props;
 
     return (
-      <ul>
+      <ul className="todo-container">
         {todos.map((todo, index) => {
-          return (
-            <li key={todo.id}>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => props.handleCompletedToggle(index)}
-              />
-              <span>{todo.text}</span>
-            </li>
-          );
+          return <Todo onChange={props.handleCompletedToggle} data={todo} index={index} />
         })}
       </ul>
     );

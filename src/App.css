@@ -8,3 +8,15 @@
   min-height: 800px;
   min-width: 400px;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.json-display-container {
+  font-size: 26px;
+}
+
+.todo-container {
+  font-size: 20px;
+}

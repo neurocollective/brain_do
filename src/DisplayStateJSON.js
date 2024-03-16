@@ -2,7 +2,7 @@ const DisplayStateJSON = (props) => {
     const { data } = props;
   
     return (
-      <div>
+      <div className="json-display-container">
         {JSON.stringify(data, null, 2)}
       </div>
     );
