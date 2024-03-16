@@ -1,6 +1,6 @@
 const Todo = (props) => {
 
-  const { data, index, onChange } = props; // data -> `{ completed, text }`
+  const { data, index, onChange, handleDeleteTodo } = props; // data -> `{ completed, text }`
 
   let textClass = '';
 
@@ -16,17 +16,26 @@ const Todo = (props) => {
         onChange={() => onChange(index)}
       />
       <span className={textClass}>{data.text}</span>
+      &nbsp;
+      &nbsp;
+      <span className="show-on-hover" onClick={() => handleDeleteTodo(index)}>X</span>
     </li>
   );
 };
 
 const TodosDisplay = (props) => {
-  const { todos } = props;
+  const { todos, handleDeleteTodo, handleCompletedToggle } = props;
 
     return (
       <ul className="todo-container">
         {todos.map((todo, index) => {
-          return <Todo key={todo.id} onChange={props.handleCompletedToggle} data={todo} index={index} />
+          return <Todo
+            key={todo.id}
+            onChange={handleCompletedToggle}
+            data={todo}
+            index={index}
+            handleDeleteTodo={handleDeleteTodo}
+          />
         })}
       </ul>
     );

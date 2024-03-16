@@ -8,10 +8,9 @@ import { useState } from 'react';
 
 const initialState = {
   todos: [
-    { text: 'Write angry blog post about git', completed: false, id: 1 },
-    { text: 'Write angry blog post about react', completed: false, id: 2 }
-  ], // this is the most important datapoint
-  loggedIn: false,
+    // { text: 'Write angry blog post about git', completed: false, id: 1 },
+    // { text: 'Write angry blog post about react', completed: false, id: 2 }
+  ],
   currentText: '',
 };
 
@@ -24,6 +23,11 @@ const copyObject = (state) => {
 };
 
 const getNextId = (todos) => {
+
+  if (!todos.length) {
+    return 1;
+  }
+
   const id = todos[todos.length - 1].id;
 
   return id + 1;
@@ -35,10 +39,12 @@ function App() {
 
   const handleCompletedToggle = (index) => {
 
-    const copiedArray = copyArray(state.todos);
-    copiedArray[index].completed = !copiedArray[index].completed
+    const copiedState = copyObject(state);
 
-    setState({ todos: copiedArray });
+    const copiedArray = copiedState.todos;
+    copiedArray[index].completed = !copiedArray[index].completed;
+
+    setState(copiedState);
   };
 
   const handleType = (event) => {
@@ -64,6 +70,28 @@ function App() {
     setState(copiedState);
   };
 
+  const handleDeleteTodo = (indexToDelete) => {
+    const copiedState = copyObject(state);
+
+    copiedState.todos = copiedState.todos.filter((_, index) => index !== indexToDelete);
+
+    // alternative to .filter w/ for loop ->
+    // const newTodos = [];
+
+    // for (let i = 0; i < state.todos.length; i++) {
+    //   const theTodo = state.todos[i];
+
+    //   if (i === indexToDelete) {
+    //     continue;
+    //   }
+    //   newTodos.push(theTodo);
+    // }
+
+    // copiedState.todos = newTodos;
+
+    setState(copiedState);
+  };
+
   return (
     <div className="App">
       <div className="column columnOne">
@@ -71,7 +99,11 @@ function App() {
       </div>
       <div className="column columnTwo">
         <CreateTodo text={state.currentText} handleType={handleType} create={createNewTodo} />
-        <TodosDisplay todos={state.todos} handleCompletedToggle={handleCompletedToggle} />
+        <TodosDisplay
+          handleDeleteTodo={handleDeleteTodo}
+          todos={state.todos}
+          handleCompletedToggle={handleCompletedToggle}
+        />
       </div>
     </div>
   );

@@ -15,8 +15,21 @@
 
 .json-display-container {
   font-size: 26px;
+  max-width: 700px;
 }
 
 .todo-container {
   font-size: 20px;
 }
+
+/* .show-on-hover {
+  visibility: hidden;
+} */
+
+.show-on-hover {
+  visibility: visible;
+}
+
+/* .show-on-hover:hover {
+  visibility: visible;
+} */
