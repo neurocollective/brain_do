@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import DisplayStateJSON from './DisplayStateJSON.js';
-import Todo from './Todo.js';
+import TodosDisplay from './TodosDisplay.js';
 
 import { useState } from 'react';
 
 const initialState = {
-  todos: [], // this is the most important datapoint
+  todos: [
+    { text: 'Write angry blog post about git', completed: false, id: 1 }
+  ], // this is the most important datapoint
   loggedIn: false,
 };
 
@@ -20,7 +22,7 @@ function App() {
         <DisplayStateJSON data={state} />
       </div>
       <div className="column columnTwo">
-        <Todo />
+        <TodosDisplay todos={state.todos} />
       </div>
     </div>
   );
